@@ -1,7 +1,11 @@
 <Solution>
   <Folder Name="/src/" />
-  <Folder Name="/src/Application/" />
-  <Folder Name="/src/Domain/" />
+  <Folder Name="/src/Application/">
+    <Project Path="ToDo.Application/ToDo.Application.csproj" />
+  </Folder>
+  <Folder Name="/src/Domain/">
+    <Project Path="ToDo.Domain/ToDo.Domain.csproj" />
+  </Folder>
   <Folder Name="/src/Infrastructure/">
     <Project Path="ToDo.Infrastructure/ToDo.Infrastructure.csproj" />
   </Folder>
