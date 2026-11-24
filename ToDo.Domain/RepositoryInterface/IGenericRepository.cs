@@ -14,5 +14,8 @@ namespace ToDo.Domain.RepositoryInterface
 
         Task<int> CommitAsync();
 
+        Task DetachAsync(object id);
+
+        Task DeleteAsync(object id);
     }
 }

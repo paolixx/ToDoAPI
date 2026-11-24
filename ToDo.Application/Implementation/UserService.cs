@@ -5,6 +5,7 @@ using System.Text;
 using Todo.Domain.DomainEntities;
 using ToDo.Application.Contracts;
 using ToDo.Application.DTOs.Request;
+using ToDo.Application.DTOs.Response;
 using ToDo.Domain.RepositoryInterface;
 
 namespace ToDo.Application.Implementation
@@ -23,6 +24,31 @@ namespace ToDo.Application.Implementation
             var response = await userRepository.CommitAsync();
 
             return response > 0;
+        }
+
+        public async Task DetachUserAsync(Guid id)
+        {
+            await userRepository.DetachAsync(id);
+        }
+
+        public async Task DeleteUserAsync(Guid id)
+        {
+            await userRepository.DeleteAsync(id);
+            var response = await userRepository.CommitAsync();
+        }
+
+        public async Task<IEnumerable<UserResponseDto>> GetAllUsersAsync()
+        {
+            var users = await userRepository.GetAllAsync();
+
+            return users.Select(u => mapper.Map<UserResponseDto>(u)).ToList();
+        }
+
+        public async Task<UserResponseDto> GetUserByIdAsync(Guid Id)
+        {
+            var user = await userRepository.GetByIdAsync(Id);
+
+            return mapper.Map<UserResponseDto>(user);
         }
     }
 }

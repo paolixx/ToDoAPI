@@ -50,5 +50,24 @@ namespace ToDo.Infrastructure.Repository
             return entity == null ? null :
                 mapper.Map<TDomain>(entity);
         }
+
+        public async Task DetachAsync(object id)
+        {
+            var entity = await toDoAppDbContext.Set<TEntity>().FindAsync(id);
+            if (entity != null)
+            {
+                toDoAppDbContext.Entry(entity).State = EntityState.Detached;
+            }
+            await Task.CompletedTask;
+        }
+
+        public async Task DeleteAsync(object id)
+        {
+            var entity = await toDoAppDbContext.Set<TEntity>().FindAsync(id);
+
+            if (entity is not null) toDoAppDbContext.Set<TEntity>().Remove(entity);
+
+            await Task.CompletedTask;
+        }
     }
 }
